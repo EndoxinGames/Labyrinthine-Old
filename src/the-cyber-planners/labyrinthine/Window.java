@@ -1,4 +1,4 @@
-package theCyberPlanners.labrynthean;
+package the-cyber-planners.labyrinthine;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
