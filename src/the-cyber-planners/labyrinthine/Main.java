@@ -1,4 +1,4 @@
-package theCyberPlanners.labrynthean;
+package the-cyber-planners.labyrinthine;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,7 +8,7 @@ public class Main {
         
         public static final int WIDTH = 800;
         public static final int HIEGHT = 600;
-        public static final String TITLE = "Labrynthean Game Engine";
+        public static final String TITLE = "Labyrinthine Game Engine";
         
         public static void main(String[] args) {
                 Window.createWindow(WIDTH, HIEGHT, TITLE);
