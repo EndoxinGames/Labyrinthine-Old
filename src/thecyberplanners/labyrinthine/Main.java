@@ -1,4 +1,4 @@
-package the-cyber-planners.labyrinthine;
+package thecyberplanners.labyrinthine;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
