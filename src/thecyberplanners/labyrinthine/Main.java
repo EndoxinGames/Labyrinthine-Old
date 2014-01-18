@@ -8,7 +8,9 @@ public class Main {
         
         public static final int WIDTH = 800;
         public static final int HIEGHT = 600;
-        public static final String TITLE = "Labyrinthine Game Engine";
+        public static final String TITLE = "Labrynthean Game Engine";
+        
+        public boolean running;
         
         public static void main(String[] args) {
                 Window.createWindow(WIDTH, HIEGHT, TITLE);
@@ -22,29 +24,36 @@ public class Main {
         }
         
         public Main() {
-                
+                running = false;
         }
         
         public void start() {
+                if(running) return;
                 run();
         }
         
         public void stop() {
-                
+                if(!running) return;
+                running = false;
         }
         
-        public void run() {
-                while (!Window.isCloseRequested()) {
+        private void run() {
+                running = true;
+                while (running) {
                         render();
+                        if(Window.isCloseRequested()){
+                                stop();
+                        }
                 }
+                cleanUp();
         }
         
-        public void render() {
+        private void render() {
                 Window.render();
         }
         
-        public void cleanUp() {
-                
+        private void cleanUp() {
+                Window.dispose();
         }
         
         public static Level level;
