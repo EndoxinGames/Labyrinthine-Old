@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 
+import org.newdawn.slick.util.Log;
+
 public class Main {
 	
 	public static final int WIDTH = 800;
@@ -17,11 +19,7 @@ public class Main {
 	public static void main(String[] args) {
 		Window.createWindow(WIDTH, HIEGHT, TITLE);
 		Main game = new Main();
-		if (Boolean.getBoolean(args[0])) {
-			setLevel(Level.ALL);
-		} else {
-			setLevel(Level.INFO);
-		}
+		setLevel(Level.ALL);
 		game.start();
 	}
 	
@@ -57,24 +55,26 @@ public class Main {
 			lastTime = currentTime;
 			
 			unprossessedTime += passedTime / (double) Time.SECOND;
-			log(Level.FINEST, frameCounter + " " + passedTime);
 			frameCounter += passedTime;
 			while (unprossessedTime >= frameTime) {
-				render=true;
+				render = true;
 				unprossessedTime -= frameTime;
 				if (Window.isCloseRequested()) {
 					stop();
 				}
 				
+				Time.setDelta(frameTime);
+				Input.update();
+				
 				game.input();
 				game.update();
-				if(frameCounter >= Time.SECOND){
+				if (frameCounter >= Time.SECOND) {
 					System.out.println(frames);
 					frames = 0;
-					frameCounter=0;
+					frameCounter = 0;
 				}
 			}
-			if (render){
+			if (render) {
 				render();
 				frames++;
 				try {
@@ -100,6 +100,7 @@ public class Main {
 	
 	public static void setLevel(Level level) {
 		Main.level = level;
+		log(Level.INFO, "Level has been set to " + Main.level.getName());
 	}
 	
 	public static void log(Level level, String msg) {

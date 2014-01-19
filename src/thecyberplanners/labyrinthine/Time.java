@@ -9,7 +9,7 @@ public class Time {
 		return System.nanoTime();
 	}
 
-	public static double setDelta(){
+	public static double getDelta(){
 		return delta;
 	}
 	
