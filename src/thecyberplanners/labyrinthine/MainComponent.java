@@ -22,14 +22,14 @@ public class MainComponent extends SimpleApplication {
 	public void simpleInitApp() {
 		flyCam.setMoveSpeed(50);
 		rootNode.attachChild(createBox("Main room", 1,1,1,ColorRGBA.Blue));
-		rootNode.attachChild(createBox("Room 1", 1, 1, 1, ColorRGBA.Orange).move(2.5f, 0, 0));
-		rootNode.attachChild(createBox("Room 2", 1, 1, 1, ColorRGBA.Orange).move(-2.5f, 0, 0));
-		rootNode.attachChild(createBox("Room 3", 1, 1, 1, ColorRGBA.Orange).move(2.5f, 0, 2.5f));
-		rootNode.attachChild(createBox("Room 4", 1, 1, 1, ColorRGBA.Orange).move(2.5f, 0, -2.5f));
-		rootNode.attachChild(createBox("Room 5", 1, 1, 1, ColorRGBA.Orange).move(0, 0, 2.5f));
-		rootNode.attachChild(createBox("Room 6", 1, 1, 1, ColorRGBA.Orange).move(0, 0, -2.5f));
-		rootNode.attachChild(createBox("Room 7", 1, 1, 1, ColorRGBA.Orange).move(-2.5f, 0, 2.5f));
-		rootNode.attachChild(createBox("Room 8", 1, 1, 1, ColorRGBA.Orange).move(-2.5f, 0, -2.5f));
+		rootNode.attachChild(createBox("Room 1", 1, 1, 1, ColorRGBA.Orange).move(2f, 0, 0));
+		rootNode.attachChild(createBox("Room 2", 1, 1, 1, ColorRGBA.Orange).move(-2f, 0, 0));
+		rootNode.attachChild(createBox("Room 3", 1, 1, 1, ColorRGBA.Orange).move(2f, 0, 2f));
+		rootNode.attachChild(createBox("Room 4", 1, 1, 1, ColorRGBA.Orange).move(2f, 0, -2f));
+		rootNode.attachChild(createBox("Room 5", 1, 1, 1, ColorRGBA.Orange).move(0, 0, 2f));
+		rootNode.attachChild(createBox("Room 6", 1, 1, 1, ColorRGBA.Orange).move(0, 0, -2f));
+		rootNode.attachChild(createBox("Room 7", 1, 1, 1, ColorRGBA.Orange).move(-2f, 0, 2f));
+		rootNode.attachChild(createBox("Room 8", 1, 1, 1, ColorRGBA.Orange).move(-2f, 0, -2f));
 	}
 
 	private Spatial createBox(String string, int i, int j, int k, ColorRGBA color) {

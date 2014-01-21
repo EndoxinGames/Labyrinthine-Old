@@ -1,4 +1,4 @@
-package thecyberplanners.labyrinthine.localizatoin;
+package thecyberplanners.labyrinthine.localization;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
