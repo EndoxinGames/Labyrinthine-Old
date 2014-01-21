@@ -1,5 +1,7 @@
 package thecyberplanners.labyrinthine;
 
+import java.util.Random;
+
 import com.jme3.app.SimpleApplication;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
@@ -7,7 +9,11 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 import com.jme3.system.AppSettings;
+
 public class MainComponent extends SimpleApplication {
+	
+	public static final int SCALE = 2;
+	public static final int ROOM_FREQUENCY = 10;
 	
 	public static void main(String[] args) {
 		AppSettings settings = new AppSettings(true);
@@ -21,17 +27,40 @@ public class MainComponent extends SimpleApplication {
 	@Override
 	public void simpleInitApp() {
 		flyCam.setMoveSpeed(50);
-		rootNode.attachChild(createBox("Main room", 1,1,1,ColorRGBA.Blue));
-		rootNode.attachChild(createBox("Room 1", 1, 1, 1, ColorRGBA.Orange).move(2f, 0, 0));
-		rootNode.attachChild(createBox("Room 2", 1, 1, 1, ColorRGBA.Orange).move(-2f, 0, 0));
-		rootNode.attachChild(createBox("Room 3", 1, 1, 1, ColorRGBA.Orange).move(2f, 0, 2f));
-		rootNode.attachChild(createBox("Room 4", 1, 1, 1, ColorRGBA.Orange).move(2f, 0, -2f));
-		rootNode.attachChild(createBox("Room 5", 1, 1, 1, ColorRGBA.Orange).move(0, 0, 2f));
-		rootNode.attachChild(createBox("Room 6", 1, 1, 1, ColorRGBA.Orange).move(0, 0, -2f));
-		rootNode.attachChild(createBox("Room 7", 1, 1, 1, ColorRGBA.Orange).move(-2f, 0, 2f));
-		rootNode.attachChild(createBox("Room 8", 1, 1, 1, ColorRGBA.Orange).move(-2f, 0, -2f));
+		rootNode.attachChild(createBox("Main room", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Blue));
+		rootNode.attachChild(createBox("Room 1", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Orange).move(2f, 0, 0));
+		rootNode.attachChild(createBox("Room 2", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Orange).move(-2f, 0, 0));
+		rootNode.attachChild(createBox("Room 3", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Orange).move(2f, 0, 2f));
+		rootNode.attachChild(createBox("Room 4", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Orange).move(2f, 0, -2f));
+		rootNode.attachChild(createBox("Room 5", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Orange).move(0, 0, 2f));
+		rootNode.attachChild(createBox("Room 6", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Orange).move(0, 0, -2f));
+		rootNode.attachChild(createBox("Room 7", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Orange).move(-2f, 0, 2f));
+		rootNode.attachChild(createBox("Room 8", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Orange).move(-2f, 0, -2f));
+		
+		Random random = new Random();
+		for (int x = -3; x <= 3; x++) {
+			for (int z = -3; z <= 3; z++) {
+				if ((Math.abs(random.nextInt() % 100)) < ROOM_FREQUENCY && !((x >= -1 && x <= 1) && (z <= 1 && z >= -1))) {
+					int num = Math.abs(random.nextInt() % 3);
+					switch (num) {
+						case 1:
+							rootNode.attachChild(createBox("Random Box Type 1", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Magenta).move(x * SCALE, 0, z * SCALE));
+							break;
+						case 2:
+							rootNode.attachChild(createBox("Random Box Type 2", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.DarkGray).move(x * SCALE, 0, z * SCALE));
+							break;
+						case 0:
+							rootNode.attachChild(createBox("Random Box Type 3", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Yellow).move(x * SCALE, 0, z * SCALE));
+							break;
+						default:
+							rootNode.attachChild(createBox("Error Box", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Red).move(x * SCALE, 0, z * SCALE));
+							break;
+					}
+				}
+			}
+		}
 	}
-
+	
 	private Spatial createBox(String string, int i, int j, int k, ColorRGBA color) {
 		Geometry box = new Geometry(string, new Box(i, j, k));
 		Material material = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
