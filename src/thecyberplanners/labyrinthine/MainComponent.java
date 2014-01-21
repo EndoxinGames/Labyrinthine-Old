@@ -12,6 +12,7 @@ import com.jme3.system.AppSettings;
 
 public class MainComponent extends SimpleApplication {
 	
+	public static final int RENDER_SIZE = 10;
 	public static final int SCALE = 2;
 	public static final double ROOM_FREQUENCY = 0.0025;
 	
@@ -40,27 +41,45 @@ public class MainComponent extends SimpleApplication {
 		rootNode.attachChild(createBox("Room 8", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Orange).move(-2f, 0, -2f));
 		
 		Random random = new Random();
-		for (int x = -100; x <= 100; x++) {
-				for (int z = -100; z <= 100; z++) {
-					if(ENABLE_3D_GEN){
-					for (int y = -100; y <= 100; y++) {
+		for (int x = -RENDER_SIZE; x <= RENDER_SIZE; x++) {
+			for (int z = -RENDER_SIZE; z <= RENDER_SIZE; z++) {
+				if (ENABLE_3D_GEN) {
+					for (int y = -RENDER_SIZE; y <= RENDER_SIZE; y++) {
+						if ((Math.abs(random.nextDouble() % 100)) < ROOM_FREQUENCY && !((x >= -1 && x <= 1) && (z <= 1 && z >= -1))) {
+							int num = Math.abs(random.nextInt() % 3);
+							switch (num) {
+								case 1:
+									rootNode.attachChild(createBox("Random Box Type 1", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Magenta).move(x * SCALE, y * SCALE, z * SCALE));
+									break;
+								case 2:
+									rootNode.attachChild(createBox("Random Box Type 2", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.DarkGray).move(x * SCALE, y * SCALE, z * SCALE));
+									break;
+								case 0:
+									rootNode.attachChild(createBox("Random Box Type 3", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Yellow).move(x * SCALE, y * SCALE, z * SCALE));
+									break;
+								default:
+									rootNode.attachChild(createBox("Error Box", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Red).move(x * SCALE, y * SCALE, z * SCALE));
+									break;
+							}
+						}
+					}
+				}else{
 					if ((Math.abs(random.nextDouble() % 100)) < ROOM_FREQUENCY && !((x >= -1 && x <= 1) && (z <= 1 && z >= -1))) {
 						int num = Math.abs(random.nextInt() % 3);
 						switch (num) {
 							case 1:
-								rootNode.attachChild(createBox("Random Box Type 1", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Magenta).move(x * SCALE, y * SCALE, z * SCALE));
+								rootNode.attachChild(createBox("Random Box Type 1", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Magenta).move(x * SCALE, 0, z * SCALE));
 								break;
 							case 2:
-								rootNode.attachChild(createBox("Random Box Type 2", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.DarkGray).move(x * SCALE, y * SCALE, z * SCALE));
+								rootNode.attachChild(createBox("Random Box Type 2", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.DarkGray).move(x * SCALE, 0, z * SCALE));
 								break;
 							case 0:
-								rootNode.attachChild(createBox("Random Box Type 3", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Yellow).move(x * SCALE, y * SCALE, z * SCALE));
+								rootNode.attachChild(createBox("Random Box Type 3", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Yellow).move(x * SCALE, 0, z * SCALE));
 								break;
 							default:
-								rootNode.attachChild(createBox("Error Box", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Red).move(x * SCALE, y * SCALE, z * SCALE));
+								rootNode.attachChild(createBox("Error Box", SCALE / 2, SCALE / 2, SCALE / 2, ColorRGBA.Red).move(x * SCALE, 0, z * SCALE));
 								break;
 						}
-					}
 					}
 				}
 			}
